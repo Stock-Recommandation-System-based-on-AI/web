@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block additional_styles %}
+<style>
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="height:20px;"></div>
+<div class="card mt-5 mx-auto text-left p-3" style="width: 25rem; opacity:0.8;">
+    <h1 class="text-center">로 그 인</h1>
+    <br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-primary btn-lg btn-block" submit="">로그인</button>
+    </form>
+    <br>
+    <p class="text-center">----가 처음이신가요? <a id="a-signup" href="{% url 'accounts:signup' %}"><b>회원가입</b></a></p>
+
+</div>
+{% endblock  %}

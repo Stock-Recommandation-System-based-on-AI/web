@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block additional_styles %}
+<style>
+  body{
+
+    position: relative;
+    z-index:1;
+  }
+  body::after {
+    width:100%;
+    min-height:100%;
+    content:"";
+    background-image:url('/static/images/signup.png');
+    background-repeat:repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:-1;
+    opacity: 0.5;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<div style="height:20px;"></div>
+<div class="card mt-5 mx-auto text-left p-3" style = "width: 26rem; opacity:0.9; background-color: rgba(0, 0, 0, 0.6);">
+    <h1 class="text-center">회 원 가 입</h1>
+    <br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-primary btn-lg btn-block" submit="">회원가입</button>
+    </form>
+</div>
+{% endblock %}
