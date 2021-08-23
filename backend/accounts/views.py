@@ -8,12 +8,14 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import CustomUserCreationForm
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect('stock:main_page')
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form = form.save()
             auth_login(request, form, backend="django.contrib.auth.backends.ModelBackend",)
-            #return redirect('stock:main_page')
+            return redirect('stock:main_page')
     else:
         form = CustomUserCreationForm()
     context ={
@@ -23,6 +25,8 @@ def signup(request):
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('stock:main_page')
     if request.method == "POST":
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():

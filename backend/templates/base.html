@@ -9,10 +9,10 @@
   <style>
     body {
       width: 100%;
-      min-height: 100%;
+      min-height: 800px;
       margin: 0;
       padding: 0;
-      background-color: var(--primary);
+      background-color: #044A67;
       color: var(--light);
       font-family: Arial, Helvetica, sans-serif;
       box-sizing: border-box;
@@ -52,9 +52,18 @@
         <li class="nav-item">
           <a class="nav-link" href="#">COMMUNITY</a>
         </li>
+        {% if user.is_active %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:profile' request.user %}">MY PAGE</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:logout' %}">LOG OUT</a>
+        </li>
+        {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'accounts:login' %}">LOG IN</a>
         </li>
+        {% endif %}
       </ul>
     </div>
   </nav>

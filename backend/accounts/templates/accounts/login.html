@@ -3,6 +3,26 @@
 {% load bootstrap4 %}
 {% block additional_styles %}
 <style>
+    .card h1 {
+        color: black;
+        font-weight: 600;
+    }
+    .card p {
+        color: black;
+        font-weight: 600;
+    }
+    .form-group label {
+        color: black;
+    }
+    .d-flex {
+        justify-content: flex-end;
+    }
+    a {
+        margin-right: 5px;
+        margin-left: 30px;
+        text-decoration: none;
+    }
+
 </style>
 {% endblock %}
 
@@ -17,7 +37,10 @@
         <button class="btn btn-primary btn-lg btn-block" submit="">로그인</button>
     </form>
     <br>
-    <p class="text-center">----가 처음이신가요? <a id="a-signup" href="{% url 'accounts:signup' %}"><b>회원가입</b></a></p>
-
+    <div class="d-flex">
+        <p class="text-center">우리 서비스가 처음이신가요?</p>
+        <a id="a-signup" href="{% url 'accounts:signup' %}"><b>회원가입</b></a>
+    </div>
+   
 </div>
 {% endblock  %}
