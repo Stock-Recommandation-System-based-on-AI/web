@@ -7,6 +7,20 @@
   <title>AI Recommandation</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <style>
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: var(--primary);
+      color: var(--light);
+      font-family: Arial, Helvetica, sans-serif;
+      box-sizing: border-box;
+      line-height: 1.4;
+    }
+    .navbar {
+      height: 50px;
+    }
     .nav-link {
       margin: 0 3px;
       padding: 9px 13px;
@@ -14,7 +28,12 @@
       color: #2574A9 !important;
       font-weight: 700;
     }
+    .main-wrapper {
+      padding-top: 50px;
+    }
   </style>
+  {% block additional_styles %}
+  {% endblock %}
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top px-5">
@@ -39,9 +58,10 @@
       </ul>
     </div>
   </nav>
-  {% block content %}
-  
-  {% endblock %}
+  <div class="main-wrapper">
+    {% block content %}
+    {% endblock %}
+  </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script ript src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
