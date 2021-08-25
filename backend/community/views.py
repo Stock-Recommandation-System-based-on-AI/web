@@ -4,15 +4,15 @@ from .models import Post
 from .forms import PostForm
 
 # Create your views here.
-def community_list(request):
-    reviews = Post.objects.order_by('-pk')
-    paginator = Paginator(reviews, 10)
+def post_list(request):
+    posts = Post.objects.order_by('-pk')
+    paginator = Paginator(posts, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
         'page_obj': page_obj,
     }
-    return render(request, 'community/community_list.html', context)
+    return render(request, 'community/post_list.html', context)
 
 
 def post_create(request):
@@ -23,7 +23,7 @@ def post_create(request):
                 form = form.save(commit=False)
                 form.user = request.user
                 form.save()
-                return redirect('community:community_list')
+                return redirect('community:post_list')
         else:
             form = PostForm()
         context = {
@@ -45,10 +45,10 @@ def post_detail(request, post_pk):
         return redirect('accounts:login')   
 
 
-def review_update(request, post_pk):
+def post_update(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk)
     if request.user != post.user:
-        return redirect('community:community_list')
+        return redirect('community:post_list')
     if request.method =="POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
@@ -66,6 +66,6 @@ def review_update(request, post_pk):
 def post_delete(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk)
     if request.user != post.user:
-        return redirect('community:community_list')
+        return redirect('community:post_list')
     post.delete()
-    return redirect('community:community_list')
+    return redirect('community:post_list')

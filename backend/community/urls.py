@@ -4,9 +4,9 @@ from . import views
 app_name = 'community'
 
 urlpatterns = [
-    path('', views.community_list, name="community_list"),
-    path('review_create/', views.post_create, name='review_create'),
-    path('<int:review_pk>/', views.post_detail, name='review_detail'),
-    path('<int:review_pk>/review_update/', views.post_update, name='review_update'),
-    path('<int:review_pk>/review_delete/', views.post_delete, name='review_delete'),
+    path('', views.post_list, name="post_list"),
+    path('post_create/', views.post_create, name='post_create'),
+    path('<int:post_pk>/', views.post_detail, name='post_detail'),
+    path('<int:post_pk>/post_update/', views.post_update, name='post_update'),
+    path('<int:post_pk>/post_delete/', views.post_delete, name='post_delete'),
 ]
