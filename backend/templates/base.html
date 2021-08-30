@@ -21,7 +21,7 @@
       margin: 0;
       padding: 0;
       background-color: #044A67;
-      color: var(--light);
+      color: #555;
       font-family: "Montserrat", sans-serif;
       box-sizing: border-box;
       line-height: 1.4;
@@ -61,7 +61,7 @@
           <a class="nav-link" href="/">HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">FORECASTS</a>
+          <a class="nav-link" href="{% url 'stock:forecasts' %}">FORECASTS</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'community:post_list' %}">COMMUNITY</a>
