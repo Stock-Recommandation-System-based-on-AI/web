@@ -5,5 +5,5 @@ app_name = 'stock'
 
 urlpatterns = [
     path('', views.main_page, name="main_page"),
-    path('/forecasts', views.forecasts, name="forecasts"),
+    path('forecasts/', views.forecasts, name="forecasts"),
 ]
