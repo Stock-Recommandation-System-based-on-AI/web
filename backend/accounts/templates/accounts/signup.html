@@ -20,14 +20,16 @@
 </style>
 {% endblock %}
 {% block content %}
-<div style="height:20px;"></div>
-<div class="card mt-5 mx-auto text-left p-3" style = "width: 30rem;">
+<div class="main-wrapper">
+  <div style="height:20px;"></div>
+  <div class="card mt-5 mx-auto text-left p-3" style = "width: 30rem;">
     <h1 class="text-center">회 원 가 입</h1>
     <br>
     <form action="" method="POST">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <button class="btn btn-primary btn-lg btn-block" submit="">회원가입</button>
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <button class="btn btn-primary btn-lg btn-block" submit="">회원가입</button>
     </form>
+  </div>
 </div>
 {% endblock %}

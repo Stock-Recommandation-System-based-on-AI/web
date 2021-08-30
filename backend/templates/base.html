@@ -38,7 +38,7 @@
     .nav-link {
       margin: 0 3px;
       padding: 9px 13px;
-      font-size: 14px;
+      font-size: 17px;
       color: #2574A9 !important;
       font-weight: 700;
     }
@@ -51,7 +51,7 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top px-5">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/">AI RECOMMAND</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -81,10 +81,8 @@
       </ul>
     </div>
   </nav>
-  <div class="main-wrapper">
-    {% block content %}
-    {% endblock %}
-  </div>
+  {% block content %}
+  {% endblock %}
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script ript src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -92,66 +90,6 @@
     $('.carousel').carousel({
     interval: 2000
   })
-  </script>
-  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-  <script type="text/javascript">
-    new TradingView.widget(
-      {
-        "width": 300,
-        "height": 350,
-        "symbol": "KRX:005930",
-        "interval": "D",
-        "timezone": "Etc/UTC",
-        "theme": "dark",
-        "style": "1",
-        "locale": "kr",
-        "toolbar_bg": "#f1f3f6",
-        "hide_top_toolbar": true,
-        "enable_publishing": false,
-        "allow_symbol_change": true,
-        "container_id": "tradingview_33640"
-      }
-    );
-  </script>
-  <script type="text/javascript">
-    new TradingView.widget(
-      {
-      "width": 300,
-      "height": 350,
-      "symbol": "KRX:000660",
-      "interval": "D",
-      "timezone": "Asia/Seoul",
-      "theme": "dark",
-      "style": "1",
-      "locale": "kr",
-      "toolbar_bg": "#f1f3f6",
-      "enable_publishing": false,
-      "hide_top_toolbar": true,
-      "allow_symbol_change": true,
-      "save_image": false,
-      "container_id": "tradingview_227d4"
-      }
-    );
-  </script>
-  <script type="text/javascript">
-    new TradingView.widget(
-      {
-      "width": 300,
-      "height": 350,
-      "symbol": "KRX:003490",
-      "interval": "D",
-      "timezone": "Asia/Seoul",
-      "theme": "dark",
-      "style": "1",
-      "locale": "kr",
-      "toolbar_bg": "#f1f3f6",
-      "enable_publishing": false,
-      "hide_top_toolbar": true,
-      "allow_symbol_change": true,
-      "save_image": false,
-      "container_id": "tradingview_a2e75"
-      }
-    );
   </script>
 </body>
 </html>

@@ -27,20 +27,22 @@
 {% endblock %}
 
 {% block content %}
-<div style="height:20px;"></div>
-<div class="card mt-5 mx-auto text-left p-3" style="width: 25rem; opacity:0.8;">
+<div class="main-wrapper">
+  <div style="height:20px;"></div>
+  <div class="card mt-5 mx-auto text-left p-3" style="width: 25rem; opacity:0.8;">
     <h1 class="text-center">로 그 인</h1>
     <br>
     <form action="" method="POST">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <button class="btn btn-primary btn-lg btn-block" submit="">로그인</button>
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <button class="btn btn-primary btn-lg btn-block" submit="">로그인</button>
     </form>
     <br>
     <div class="d-flex">
-        <p class="text-center">우리 서비스가 처음이신가요?</p>
-        <a id="a-signup" href="{% url 'accounts:signup' %}"><b>회원가입</b></a>
-    </div>
-   
+      <p class="text-center">우리 서비스가 처음이신가요?</p>
+      <a id="a-signup" href="{% url 'accounts:signup' %}"><b>회원가입</b></a>
+    </div>     
+  </div>
 </div>
+
 {% endblock  %}
