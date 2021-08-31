@@ -37,11 +37,43 @@
   padding:10px;
   width:100%;
   box-shadow: 2px 4px 4px 0px rgba(5, 5, 5, 0.06);
+  margin-bottom: 50px;
 }
 label {
   font-weight: 700;
   margin-bottom: 20px;
   max-width: 100%;
+}
+.btn, .submit {
+  font-family: "Montserrat", sans-serif, "FontAwesome";
+  letter-spacing: 0.02em;
+  font-weight: bold;
+  border: 0;
+  padding: 0 15px;
+  height: 40px;
+  line-height: 40px;
+}
+.entry-title h2 {
+  margin-top: 0px;
+  color: #044A67;
+}
+.entry-title h2 a{
+  color: #044A67;
+}
+.entry-title h4 a:hover {
+  text-decoration: none;
+}
+.stock-title small {
+  font-size: 65%;
+  font-weight: 400;
+  line-height: 1;
+  color: #777;
+}
+.follow, .unfollow {
+  border: solid!important;
+  padding-bottom: 38px!important;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 </style>
 {% endblock %}
@@ -69,20 +101,53 @@ label {
                 </span>
               </div>
             </form>
-
-
-            <a style="margin-top:20px;" href="/stock-forecast-stock-prediction/?&amp;minpercent=-100&amp;maxpercent=100&amp;s=" class="btn "><i class="fa fa-line-chart"></i> ALL FORECASTS</a>
-            <a title="" style="margin-top:20px;color:red;" href="/pricing" class="btn "><i class="fa fa-line-chart"></i>STRONG SELL</a>
-            
-            <a title="" style="margin-top:20px;color:#fd4444;" href="/stock-forecast-stock-prediction/?&amp;minpercent=-10&amp;maxpercent=0&amp;s=" class="btn "><i class="fa fa-line-chart"></i> SELL</a>
-            <a title="" style="margin-top:20px;color:#fec761;" href="/stock-forecast-stock-prediction/?&amp;minpercent=0&amp;maxpercent=2&amp;s=" class="btn "><i class="fa fa-line-chart"></i> NEUTRAL</a>
-            <a title="" style="margin-top:20px;color:orange;" href="/stock-forecast-stock-prediction/?&amp;minpercent=2&amp;maxpercent=4&amp;s=" class="btn "><i class="fa fa-line-chart"></i> HOLD</a>
-            <a title="" style="margin-top:20px;color:#51a952;" href="/stock-forecast-stock-prediction/?&amp;minpercent=4&amp;maxpercent=10&amp;s=" class="btn "><i class="fa fa-line-chart"></i> BUY</a>
-            <a title="Delayed by 2 weeks for free users" style="margin-top:20px;color:green;" href="/pricing" class="btn "><i class="fa fa-line-chart"></i> STRONG BUY</a>
+            <a style="margin-top:20px;" href="" class="btn"><i class="fa fa-chart-line"></i> ALL FORECASTS</a>
+            <a style="margin-top:20px;color:red;" href="" class="btn"><i class="fa fa-chart-line"></i>STRONG SELL</a>
+            <a style="margin-top:20px;color:#fd4444;" href="" class="btn"><i class="fa fa-chart-line"></i> SELL</a>
+            <a style="margin-top:20px;color:#fec761;" href="" class="btn"><i class="fa fa-chart-line"></i> NEUTRAL</a>
+            <a style="margin-top:20px;color:orange;" href="" class="btn"><i class="fa fa-chart-line"></i> HOLD</a>
+            <a style="margin-top:20px;color:#51a952;" href="" class="btn"><i class="fa fa-chart-line"></i> BUY</a>
+            <a style="margin-top:20px;color:green;" href="" class="btn"><i class="fa fa-chart-line"></i> STRONG BUY</a>
           </div>
+        </div>
+        <div class="col-md-12">
+          <div class="entry-title">
+            <h2 class="stock-title">
+              <a href="" tabindex="0">삼성전자</a>
+              <a href="/follow/ANET" class="btn follow"><i class="fa fa-plus"></i> Get email alerts</a>
+              <span style="display:inline-block;">
+                <small>2021년 8월 30일</small>
+                <small style="color:#fd4444;font-weight: bold;">SELL</small>
+              </span>
+            </h2>
+          </div>
+          <article>
+            <div class="tradingview-widget-container">
+              <div id="tradingview_85381"></div>
+            </div>
+          </article>
         </div>
       </div>
     </div>
   </section>
 </div>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+new TradingView.widget(
+{
+"width": 1100,
+"height": 500,
+"symbol": "KRX:005930",
+"interval": "D",
+"timezone": "Asia/Seoul",
+"theme": "dark",
+"style": "1",
+"locale": "kr",
+"toolbar_bg": "#f1f3f6",
+"enable_publishing": false,
+"save_image": false,
+"container_id": "tradingview_85381"
+}
+);
+</script>
 {% endblock %}
