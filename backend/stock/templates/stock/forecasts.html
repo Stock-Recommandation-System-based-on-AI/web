@@ -75,6 +75,9 @@ label {
   margin-top: 5px;
   margin-bottom: 10px;
 }
+.stock-chart {
+  margin-bottom: 50px;
+}
 </style>
 {% endblock %}
 
@@ -121,9 +124,43 @@ label {
               </span>
             </h2>
           </div>
-          <article>
+          <article class="stock-chart">
             <div class="tradingview-widget-container">
               <div id="tradingview_85381"></div>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-12">
+          <div class="entry-title">
+            <h2 class="stock-title">
+              <a href="" tabindex="0">SK하이닉스</a>
+              <a href="/follow/ANET" class="btn follow"><i class="fa fa-plus"></i> Get email alerts</a>
+              <span style="display:inline-block;">
+                <small>2021년 8월 30일</small>
+                <small style="color:#fd4444;font-weight: bold;">SELL</small>
+              </span>
+            </h2>
+          </div>
+          <article class="stock-chart">
+            <div class="tradingview-widget-container">
+              <div id="tradingview_227d4"></div>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-12">
+          <div class="entry-title">
+            <h2 class="stock-title">
+              <a href="" tabindex="0">대한항공</a>
+              <a href="/follow/ANET" class="btn follow"><i class="fa fa-plus"></i> Get email alerts</a>
+              <span style="display:inline-block;">
+                <small>2021년 8월 30일</small>
+                <small style="color:#fd4444;font-weight: bold;">SELL</small>
+              </span>
+            </h2>
+          </div>
+          <article class="stock-chart">
+            <div class="tradingview-widget-container">
+              <div id="tradingview_a2e75"></div>
             </div>
           </article>
         </div>
@@ -133,21 +170,43 @@ label {
 </div>
 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script type="text/javascript">
-new TradingView.widget(
-{
-"width": 1100,
-"height": 500,
-"symbol": "KRX:005930",
-"interval": "D",
-"timezone": "Asia/Seoul",
-"theme": "dark",
-"style": "1",
-"locale": "kr",
-"toolbar_bg": "#f1f3f6",
-"enable_publishing": false,
-"save_image": false,
-"container_id": "tradingview_85381"
-}
-);
+(() => {
+      const obj = [
+        {
+          key: 'tradingview_85381',
+          symbol: 'KRX:005930',
+        },
+        {
+          key: 'tradingview_227d4',
+          symbol: 'KRX:000660',
+        },
+        {
+          key: 'tradingview_a2e75',
+          symbol: 'KRX:003490',
+        },
+
+      ]
+
+      obj.forEach(({ key, symbol }) => {
+        console.log(key, symbol)
+        
+        new TradingView.widget(
+          {
+            "width": 1100,
+            "height": 500,
+            "symbol": symbol,
+            "interval": "D",
+            "timezone": "Asia/Seoul",
+            "theme": "dark",
+            "style": "1",
+            "locale": "kr",
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "save_image": false,
+            "container_id": key
+          }
+      );
+    })
+  })();
 </script>
 {% endblock %}
