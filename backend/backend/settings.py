@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import sys
 
 from pathlib import Path
 
@@ -29,6 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+sys.modules['fontawesome_free'] = __import__('fontawesome-free')
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'stock',
     'community',
     'bootstrap4',
+    'fontawesome_free',
 ]
 
 MIDDLEWARE = [
