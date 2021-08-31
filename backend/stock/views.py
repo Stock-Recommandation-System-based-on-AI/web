@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 def main_page(request):
@@ -6,4 +6,7 @@ def main_page(request):
 
 
 def forecasts(request):
-    return render(request, 'stock/forecasts.html')
+    if request.user.is_authenticated:
+        return render(request, 'stock/forecasts.html')
+    else:
+        return redirect('accounts:login')
