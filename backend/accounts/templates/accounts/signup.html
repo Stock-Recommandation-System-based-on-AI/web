@@ -2,25 +2,28 @@
 {% load bootstrap4 %}
 {% block additional_styles %}
 <style>
-  .card {
-    background-color: #fff;
-    opacity: 0.8;
-  }
-  .card h1 {
-        color: black;
-        font-weight: 600;
-  }
-  .card p {
+.main-wrapper {
+  padding-bottom: 70px;
+}
+.card {
+  background-color: #fff;
+  opacity: 0.8;
+}
+.card h1 {
       color: black;
       font-weight: 600;
-  }
-  .form-group label {
-      color: black;
-  }
+}
+.card p {
+    color: black;
+    font-weight: 600;
+}
+.form-group label {
+    color: black;
+}
 </style>
 {% endblock %}
 {% block content %}
-<div class="main-wrapper">
+<div class="main-wrapper bg-white">
   <div style="height:20px;"></div>
   <div class="card mt-5 mx-auto text-left p-3" style = "width: 30rem;">
     <h1 class="text-center">회 원 가 입</h1>
