@@ -47,6 +47,17 @@
     .main-wrapper {
       padding-top: 70px;
     }
+    .page-footer {
+      color:#fff;
+      text-decoration: none;
+    }
+    .page-footer a {
+      color: white;
+      font-weight: bold;
+    }
+    .footer-copyright {
+      background-color: #04415b;
+    }
   </style>
   {% block additional_styles %}
   {% endblock %}
@@ -85,6 +96,54 @@
   </nav>
   {% block content %}
   {% endblock %}
+  <footer class="page-footer font-small blue pt-4">
+    <div class="container text-center text-md-left">
+      <div class="row">
+        <div class="col-md-6 mt-md-0 mt-3">
+          <h5 class="text-uppercase">Footer Content</h5>
+          <p>Here you can use rows and columns to organize your footer content.</p>
+        </div>
+        <hr class="clearfix w-100 d-md-none pb-3">
+        <div class="col-md-3 mb-md-0 mb-3">
+          <h5 class="text-uppercase">Links</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Link 1</a>
+            </li>
+            <li>
+              <a href="#!">Link 2</a>
+            </li>
+            <li>
+              <a href="#!">Link 3</a>
+            </li>
+            <li>
+              <a href="#!">Link 4</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-md-0 mb-3">
+          <h5 class="text-uppercase">Links</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Link 1</a>
+            </li>
+            <li>
+              <a href="#!">Link 2</a>
+            </li>
+            <li>
+              <a href="#!">Link 3</a>
+            </li>
+            <li>
+              <a href="#!">Link 4</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright text-center py-4">© 2021 Copyright:
+      <a href=""> Programmers AI dev-school b-5</a>
+    </div>
+  </footer>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script ript src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
