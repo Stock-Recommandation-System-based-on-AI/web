@@ -81,6 +81,19 @@
   left: -2000%;
   top: 50%;
 }
+
+.title-2 h2 ::after {
+  content: '-';
+  font-size: 2px;
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.1);
+  height: 4px;
+  display: block;
+  width: 2000%;
+  position: absolute;
+  left: -2000%;
+  top: 50%;
+}
 .stock-chart h4 {
   margin-top: 0px;
   color: #044A67;
@@ -138,6 +151,125 @@
         <div class="col-md-12">
           <div class="title">
             <h2>
+              <a href="{% url 'stock:forecasts' %}" style="color:inherit;text-decoration: none;">Today Active Stock</a>
+            </h2>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <article class="today-stock" style="width:500px; margin:0 auto;">
+            <div class="stock-chart">
+              <h4 class="stock-title" style="text-align: center; font-size: 26px;">
+                오늘의 주식변동 TOP5
+              </h4>
+              <div class="stock-widget" style="height:550px;">
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
+                  {
+                  "colorTheme": "dark",
+                  "dateRange": "1M",
+                  "exchange": "KRX",
+                  "showChart": true,
+                  "locale": "kr",
+                  "width": "100%",
+                  "height": "100%",
+                  "largeChartUrl": "",
+                  "isTransparent": false, 
+                  "showSymbolLogo": false,
+                  "showFloatingTooltip": false,
+                  "plotLineColorGrowing": "rgba(255, 0, 0, 1)",
+                  "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+                  "gridLineColor": "rgba(240, 243, 250, 0)",
+                  "scaleFontColor": "rgba(120, 123, 134, 1)",
+                  "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+                  "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
+                  "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
+                  "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
+                  "symbolActiveColor": "rgba(41, 98, 255, 0.12)"
+                }
+                  </script>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6">
+          <article class="today-stock" style="width:500px; margin:0 auto;">
+            <div class="stock-chart">
+              <h4 class="stock-title" style="text-align: center; font-size: 26px;">
+                현재 주요지수 및 환율
+              </h4>
+              <div class="stock-widget" style="height:550px;">
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+                  {
+                  "width": "500",
+                  "height": "550",
+                  "symbolsGroups": [
+                    {
+                      "name": "지수",
+                      "originalName": "Indices",
+                      "symbols": [
+                        {
+                          "name": "FOREXCOM:SPXUSD",
+                          "displayName": "S&P 500"
+                        },
+                        {
+                          "name": "FOREXCOM:NSXUSD",
+                          "displayName": "Nasdaq 100"
+                        },
+                        {
+                          "name": "FOREXCOM:DJI",
+                          "displayName": "Dow 30"
+                        },
+                        {
+                          "name": "KRX:KOSPI",
+                          "displayName": "KOSPI"
+                        },
+                        {
+                          "name": "KRX:KOSDAQ",
+                          "displayName": "KOSDAQ"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "외환",
+                      "originalName": "Forex",
+                      "symbols": [
+                        {
+                          "name": "USDKRW",
+                          "displayName": "KRWUSD"
+                        },
+                        {
+                          "name": "CNYKRW",
+                          "displayName": "KRWCNY"
+                        },
+                        {
+                          "name": "FX_IDC:JPYKRW",
+                          "displayName": "KRWJPY"
+                        },
+                        {
+                          "name": "EURKRW",
+                          "displayName": "KRWEUR"
+                        }
+                      ]
+                    }
+                  ],
+                  "showSymbolLogo": true,
+                  "colorTheme": "dark",
+                  "isTransparent": false,
+                  "locale": "kr"
+                }
+                  </script>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-12">
+          <div class="title">
+            <h2>
               <a href="{% url 'stock:forecasts' %}" style="color:inherit;text-decoration: none;">Latest forecasts</a>
             </h2>
           </div>
@@ -153,7 +285,6 @@
                 </span>
               </h4>
               <div class="stock-widget">
-                <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                   <div id="tradingview_33640" class="widget-view"></div>
                 </div>
@@ -172,7 +303,6 @@
                 </span>
               </h4>
               <div class="stock-widget">
-                <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                   <div id="tradingview_227d4" class="widget-view"></div>
                 </div>
@@ -191,7 +321,6 @@
                 </span>
               </h4>
               <div class="stock-widget">
-                <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                   <div id="tradingview_a2e75" class="widget-view"></div>
                 </div>
@@ -263,4 +392,6 @@
     }
   );
 </script>
+
+
 {% endblock %}
