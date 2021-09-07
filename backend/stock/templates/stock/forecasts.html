@@ -8,7 +8,7 @@
   text-align: left;
   margin-top: 100px;
 }
-.title h2 {
+.title h2, {
   color: #044A67;
   font-weight: bold;
   font-size: 35px;
@@ -69,12 +69,6 @@ label {
   line-height: 1;
   color: #777;
 }
-.follow, .unfollow {
-  border: solid!important;
-  padding-bottom: 38px!important;
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
 .stock-chart {
   margin-bottom: 50px;
 }
@@ -116,8 +110,7 @@ label {
         <div class="col-md-12">
           <div class="entry-title">
             <h2 class="stock-title">
-              <a href="" tabindex="0">삼성전자</a>
-              <a href="/follow/ANET" class="btn follow"><i class="fa fa-plus"></i> 관심 종목 추가</a>
+              <a href="{% url 'stock:forecast_detail' stock.pk %}" tabindex="0">삼성전자</a>
               <span style="display:inline-block;">
                 <small>2021년 8월 30일</small>
                 <small style="color:#fd4444;font-weight: bold;">SELL</small>
@@ -133,8 +126,7 @@ label {
         <div class="col-md-12">
           <div class="entry-title">
             <h2 class="stock-title">
-              <a href="" tabindex="0">SK하이닉스</a>
-              <a href="/follow/ANET" class="btn follow"><i class="fa fa-plus"></i> 관심 종목 추가</a>
+              <a href="{% url 'stock:forecast_detail' stock.pk %}" tabindex="0">SK하이닉스</a>
               <span style="display:inline-block;">
                 <small>2021년 8월 30일</small>
                 <small style="color:#fd4444;font-weight: bold;">SELL</small>
@@ -150,8 +142,7 @@ label {
         <div class="col-md-12">
           <div class="entry-title">
             <h2 class="stock-title">
-              <a href="" tabindex="0">대한항공</a>
-              <a href="/follow/ANET" class="btn follow"><i class="fa fa-plus"></i> 관심 종목 추가</a>
+              <a href="{% url 'stock:forecast_detail' stock.pk %}" tabindex="0">대한항공</a>
               <span style="display:inline-block;">
                 <small>2021년 8월 30일</small>
                 <small style="color:#fd4444;font-weight: bold;">SELL</small>
