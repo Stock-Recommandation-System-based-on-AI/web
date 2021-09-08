@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load bootstrap_pagination %}
+{% bootstrap_paginate page_obj %}
 
 {% block additional_styles %}
 <style>
@@ -8,7 +10,7 @@
   text-align: left;
   margin-top: 100px;
 }
-.title h2, {
+.title h2 {
   color: #044A67;
   font-weight: bold;
   font-size: 35px;
@@ -76,6 +78,8 @@ label {
 {% endblock %}
 
 {% block content %}
+
+
 <div class="main-wrapper">
   <section class="bg-white">
     <div class="container">
@@ -107,55 +111,30 @@ label {
             <a style="margin-top:20px;color:green;" href="" class="btn"><i class="fa fa-chart-line"></i> STRONG BUY</a>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="entry-title">
-            <h2 class="stock-title">
-              <a href="{% url 'stock:forecast_detail' stock.pk %}" tabindex="0">삼성전자</a>
-              <span style="display:inline-block;">
-                <small>2021년 8월 30일</small>
-                <small style="color:#fd4444;font-weight: bold;">SELL</small>
-              </span>
-            </h2>
-          </div>
-          <article class="stock-chart">
-            <div class="tradingview-widget-container">
-              <div id="tradingview_85381"></div>
+        {% for stock in page_obj %}
+          <div class="col-md-12">
+            <div class="entry-title">
+              <h2 class="stock-title">
+                <a href="{% url 'stock:forecast_detail' stock.id %}" tabindex="0">{{ stock.name }}</a>
+                <span style="display:inline-block;">
+                  <small class="date">2021년 8월 30일</small>
+                  <small style="color:#fd4444;font-weight: bold;">SELL</small>
+                </span>
+              </h2>
             </div>
-          </article>
-        </div>
-        <div class="col-md-12">
-          <div class="entry-title">
-            <h2 class="stock-title">
-              <a href="{% url 'stock:forecast_detail' stock.pk %}" tabindex="0">SK하이닉스</a>
-              <span style="display:inline-block;">
-                <small>2021년 8월 30일</small>
-                <small style="color:#fd4444;font-weight: bold;">SELL</small>
-              </span>
-            </h2>
+            <article class="stock-chart">
+              <div class="tradingview-widget-container">
+                <div id="{{ stock.container_id }}"></div>
+              </div>
+            </article>
           </div>
-          <article class="stock-chart">
-            <div class="tradingview-widget-container">
-              <div id="tradingview_227d4"></div>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-12">
-          <div class="entry-title">
-            <h2 class="stock-title">
-              <a href="{% url 'stock:forecast_detail' stock.pk %}" tabindex="0">대한항공</a>
-              <span style="display:inline-block;">
-                <small>2021년 8월 30일</small>
-                <small style="color:#fd4444;font-weight: bold;">SELL</small>
-              </span>
-            </h2>
-          </div>
-          <article class="stock-chart">
-            <div class="tradingview-widget-container">
-              <div id="tradingview_a2e75"></div>
-            </div>
-          </article>
-        </div>
+        {% endfor %}
       </div>
+      <nav aria-label="Page navigation example" style="padding-top:50px; padding-bottom:50px;">
+        <ul class="pagination justify-content-center text-black">
+          {% bootstrap_paginate page_obj range=10 show_prev_next="false" show_first_last="true" %}
+        </ul>
+      </nav>  
     </div>
   </section>
 </div>
@@ -163,20 +142,23 @@ label {
 <script type="text/javascript">
 (() => {
       const obj = [
-        {
-          key: 'tradingview_85381',
-          symbol: 'KRX:005930',
-        },
-        {
-          key: 'tradingview_227d4',
-          symbol: 'KRX:000660',
-        },
-        {
-          key: 'tradingview_a2e75',
-          symbol: 'KRX:003490',
-        },
-
-      ]
+        {% for stock in page_obj %}
+          {
+            key: '{{ stock.container_id }}',
+            symbol: '{{ stock.symbol_id }}',
+          },
+        {% endfor %}
+        ]
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = ('0' + (today.getMonth() + 1)).slice(-2);
+      const day = ('0' + today.getDate()).slice(-2);
+      const datestring = year + '년 ' + month + '월 ' + day + '일';
+      const date = document.getElementsByClassName("date");
+      for( var i = 0; i < date.length; i++){
+        var date1 = date.item(i);
+        date1.innerHTML = datestring
+      }
 
       obj.forEach(({ key, symbol }) => {
         console.log(key, symbol)
