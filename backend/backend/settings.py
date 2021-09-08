@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'community',
     'bootstrap4',
     'fontawesome_free',
+    'bootstrap_pagination',
+    'pykrx',
 ]
 
 MIDDLEWARE = [
