@@ -18,7 +18,7 @@ def main_page(request):
 
 def forecasts(request):
     if request.user.is_authenticated:
-        stocks = Stock.objects.all()
+        stocks = Stock.objects.all().order_by('id')
         paginator = Paginator(stocks, 6)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -41,6 +41,7 @@ def forecast_detail(request, stock_pk):
     news_iframe_url = iframe_urls[0]['src']
     disclosure_iframe_url = iframe_urls[1]['src']
 
+    #주식 뉴스정보 데이터
     urls = 'https://finance.naver.com' + news_iframe_url
     res = requests.get(urls, headers=headers)
     soups = BeautifulSoup(res.text, 'html.parser')
@@ -59,6 +60,7 @@ def forecast_detail(request, stock_pk):
         }
         news.append(obj)
 
+    # 주식 공시정보 데이터
     urls = 'https://finance.naver.com' + disclosure_iframe_url
     res = requests.get(urls, headers=headers)
     soups = BeautifulSoup(res.text, 'html.parser')
@@ -77,14 +79,19 @@ def forecast_detail(request, stock_pk):
         }
         disclosure.append(obj)
 
+    # 주식 펀더멘탈 데이터
     df = stock.get_market_fundamental_by_date(today, today, stock_pk)
     stock_data = df.to_dict('records')
-    
+
+    # 주식 매매동향 데이터
+    df = stock.get_market_trading_volume_by_date(today, today, stock_pk, detail=True)
+    trading_data = df.to_dict('records')
     context = {
         'stock_detail': stock_detail,
         'news': news,
         'disclosure': disclosure,
-        'stock_data': stock_data,
+        'stock_data': stock_data[0],
+        'trading_data': trading_data[0],
     }
     return render(request, 'stock/forecast_detail.html', context)
 

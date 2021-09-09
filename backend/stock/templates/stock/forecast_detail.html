@@ -83,6 +83,16 @@ label {
   line-height: 2;
   font-size: 13px;
 }
+.fundamental-box a {
+  text-decoration: none;
+  line-height: 2.5;
+  font-size: 16px;
+}
+.fundamental-box span {
+  float: right;
+  line-height: 2.5;
+  font-size: 16px;
+}
 </style>
 {% endblock %}
 
@@ -157,13 +167,44 @@ label {
             {% endfor %}
           </div>
         </div>
-        <div class="col-md-6">
-          {{ stock_data }}
+        <div class="col-md-6" style="margin-top: 50px; margin-bottom:50px;">
+          <h4>{{ stock_detail.name }} 펀더멘털</h4>
+          <div class="fundamental-box">
+            <div>
+              <a>BPS (1주당 순 자산가치) </a>
+              <span>{{ stock_data.BPS }} 원</span>
+            </div>
+            <div>
+              <a>PBR (주가 자산비율) </a>
+              <span>{{ stock_data.PBR | floatformat:2 }} 배</span>
+            </div>
+            <div>
+              <a>EPS (1주당 순 이익) </a>
+              <span>{{ stock_data.EPS }} 원</span>
+            </div>
+            <div>
+              <a>PER (주가 수익비율) </a>
+              <span>{{ stock_data.PER | floatformat:2 }} 배</span>
+            </div>
+            <div>
+              <a>DPS (1주당 배당금액) </a>
+              <span>{{ stock_data.DPS }} 원</span>
+            </div>
+            <div>
+              <a>DIV (주식 배당수익률) </a>
+              <span>{{ stock_data.DIV | floatformat:2 }} 배</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-top: 50px; margin-bottom:50px;">
+          <h4>{{ stock_detail.name }} 매매동향</h4>
+          <canvas id="bar-chart" width="320" height="150"></canvas>
         </div>
       </div>
     </div>
   </section>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script type="text/javascript">
   new TradingView.widget(
@@ -182,6 +223,24 @@ label {
             "container_id": '{{ stock_detail.container_id }}'
           }
       );
+  new Chart(document.getElementById("bar-chart"), {
+    type: 'bar',
+    data: {
+      labels: ["개인", "외국인", "금융투자", "투신", "사모펀드", "은행", "연기금", "기타법인"],
+      datasets: [
+        {
+          label: "주",
+          backgroundColor: ["#003f5c", "#2f4b79","#63528e","#995493","#ca5689", "#ee6272", "#ff7c54", "#ffa132"],
+          data: ['{{ trading_data.개인 }}','{{ trading_data.외국인 }}', '{{ trading_data.금융투자 }}',
+          '{{ trading_data.투신 }}', '{{ trading_data.사모펀드 }}', '{{ trading_data.은행 }}', 
+          '{{ trading_data.연기금 }}', '{{ trading_data.기타법인 }}']
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+    }
+  });
 </script>
 <script>
   const today = new Date();
