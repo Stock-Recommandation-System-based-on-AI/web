@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.core.paginator import Paginator
-from django.utils.dateformat import DateFormat
+from django.db.models import Q
 from .models import Stock
 from bs4 import BeautifulSoup
 from pykrx import stock
 from datetime import date, timedelta
-import requests, json
-import pandas as pd
+import requests
 
 today = (date.today() - timedelta(1)).strftime('%Y%m%d')
 
@@ -19,6 +18,9 @@ def main_page(request):
 def forecasts(request):
     if request.user.is_authenticated:
         stocks = Stock.objects.all().order_by('id')
+        if 'q' in request.GET:
+            query = request.GET.get('q')
+            stocks = Stock.objects.all().filter(Q(name__contains=query) | Q(id__contains=query))
         paginator = Paginator(stocks, 6)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
