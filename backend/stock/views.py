@@ -5,10 +5,22 @@ from django.db.models import Q
 from .models import Stock
 from bs4 import BeautifulSoup
 from pykrx import stock
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 import requests
 
-today = (date.today() - timedelta(1)).strftime('%Y%m%d')
+# 17시가 지나면 당일의 데이터를 불러온다. 17시 전이라면 전날의 데이터를 불러온다.
+time_data = datetime.now().strftime("%H:%M:%S")
+if int(time_data[:2]) > 16:
+    d = 0
+else:
+    d = 1
+
+today = (date.today() - timedelta(d)).strftime('%Y%m%d')
+# pykrx 라이브러리에서는 주말날짜의 데이터를 지원하지 않는다. 주말인경우 금요일로 날짜를 맞춘다.
+
+if date(int(today[:4]), int(today[4:6]), int(today[6:])).weekday() > 4:
+    minus_day = date(int(today[:4]), int(today[4:6]), int(today[6:])).weekday() - 4
+    today = (date.today() - timedelta(minus_day)).strftime('%Y%m%d')
 
 # Create your views here.
 def main_page(request):
@@ -108,7 +120,6 @@ def interest(request, stock_pk):
         stock.interest_users.add(user)
         interested = True
     context = {
-        'count': stock.like_users.count(),
         'interested': interested,
     }
     return JsonResponse(context)
