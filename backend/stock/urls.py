@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.main_page, name="main_page"),
     path('forecasts/', views.forecasts, name="forecasts"),
     path('forecasts/<str:stock_pk>/', views.forecast_detail, name="forecast_detail"),
-    path('<int:stock_pk>/interest/', views.interest, name='interest'),
+    path('<str:stock_pk>/interest/', views.interest, name='interest'),
 ]
