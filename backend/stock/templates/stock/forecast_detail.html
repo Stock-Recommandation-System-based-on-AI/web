@@ -105,7 +105,11 @@ label {
           <div class="title">
             <h2>
               {{ stock_detail.name }}
-              <a href="/follow/AIRT" class="btn follow"><i class="fa fa-plus"></i> 관심 종목 추가</a>
+              {% if request.user in stock_detail.interest_users.all %}
+              <a class="btn unfollow interest-button" data-id="{{ stock_detail.id }}"><i class="fa fa-plus"></i> 관심 종목 해제</a>
+              {% else %}
+              <a class="btn follow interest-button" data-id="{{ stock_detail.id }}"><i class="fa fa-plus"></i> 관심 종목 추가</a>
+              {% endif %}
               <span style="display:inline-block;">
                 <small id="date">2021년 9월 5일</small>
                 <small style="color:#fd4444;font-weight: bold;">매도</small>
@@ -205,7 +209,7 @@ label {
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
   new TradingView.widget(
           {
             "width": '100%',
@@ -240,6 +244,24 @@ label {
       legend: { display: false },
     }
   });
+
+  const interestButtons = document.querySelectorAll('.interest-button')
+  interestButtons.forEach(button => {
+    button.addEventListener('click', function (event) {
+      const stockId = event.target.dataset.id
+      axios.get(`/${stockId}/interest/`)
+        .then(response => {
+          const element = document.getElementsByClassName('interest-button');
+          if (response.data.interested) {
+            element[0].innerHTML = '<i class="fa fa-plus"></i> 관심 종목 해제'
+          } else {
+            element[0].innerHTML = '<i class="fa fa-plus"></i> 관심 종목 추가'
+          }
+        })
+        .catch(error => console.log(error))
+    })
+  })
+
 </script>
 <script>
   const today = new Date();
