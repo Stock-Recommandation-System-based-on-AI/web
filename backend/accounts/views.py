@@ -3,9 +3,11 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from stock.models import Stock
 from .models import *
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import CustomUserCreationForm
+
 
 def signup(request):
     if request.user.is_authenticated:
@@ -49,7 +51,9 @@ def logout(request):
 def profile(request, username):
     User = get_user_model()
     user = get_object_or_404(User, username=username)
+    interests = user.interest_stock.all()
     context = {
-        'user': user
+        'user': user,
+        'interests': interests,
     }
     return render(request, 'accounts/profile.html', context)
