@@ -106,7 +106,7 @@ label {
             <h2>
               {{ stock_detail.name }}
               {% if request.user in stock_detail.interest_users.all %}
-              <a class="btn unfollow interest-button" data-id="{{ stock_detail.id }}"><i class="fa fa-plus"></i> 관심 종목 해제</a>
+              <a class="btn unfollow interest-button" data-id="{{ stock_detail.id }}"><i class="fa fa-minus"></i> 관심 종목 해제</a>
               {% else %}
               <a class="btn follow interest-button" data-id="{{ stock_detail.id }}"><i class="fa fa-plus"></i> 관심 종목 추가</a>
               {% endif %}
@@ -253,7 +253,7 @@ label {
         .then(response => {
           const element = document.getElementsByClassName('interest-button');
           if (response.data.interested) {
-            element[0].innerHTML = '<i class="fa fa-plus"></i> 관심 종목 해제'
+            element[0].innerHTML = '<i class="fa fa-minus"></i> 관심 종목 해제'
           } else {
             element[0].innerHTML = '<i class="fa fa-plus"></i> 관심 종목 추가'
           }
