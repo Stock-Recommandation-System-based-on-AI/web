@@ -4,15 +4,15 @@
 {% endblock %}
 
 {% block content %}
-<div class="main-wrapper">
-  <div class ="container" style="margin-top: 10rem; color: white;">
+<div class="main-wrapper bg-white">
+  <div class ="container" style="margin-top: 10rem;;">
   <div class="" style="margin-top:40px">
     <!-- <hr style="height: 5px; color:rgb(243, 234, 205);" -->
     <p style="font-weight: 1000; font-size: 2rem; margin-right: 30rem;">리뷰</p>
-    <a class="btn btn-outline-secondary" href="{% url 'community:post_list' %}" style="color: white">목록으로 돌아가기</a>
-    <hr style="background-color: white">
+    <a class="btn btn-outline-secondary" href="{% url 'community:post_list' %}">목록으로 돌아가기</a>
+    <hr>
     <h2 sytle="font-weight: bold;">{{ post.title }}</h2>
-    <hr style="background-color: white">
+    <hr>
     <span>작성자: {{ post.user }}님
     <span class="float-right">작성일자: {{ post.created_at }}</span>
     <p style="font-size: 2rem; color: black;">.</p>
