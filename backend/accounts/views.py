@@ -52,8 +52,10 @@ def profile(request, username):
     User = get_user_model()
     user = get_object_or_404(User, username=username)
     interests = user.interest_stock.all()
+    activities = user.user_post.all()
     context = {
         'user': user,
         'interests': interests,
+        'activities': activities,
     }
     return render(request, 'accounts/profile.html', context)
