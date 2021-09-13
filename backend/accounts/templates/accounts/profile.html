@@ -59,6 +59,7 @@
             </h2>
           </div>
         </div>
+        {% if interests %}
         {% for stock in interests %}
         <div class="col-md-4" style="margin-bottom:50px;">
           <article class="stock-card" style="width: 300px;">
@@ -79,6 +80,11 @@
           </article>
         </div>
         {% endfor %}
+        {% else %}
+        <div class="col-md-12" style="margin-top:50px; padding-left:250px;">
+          <h4>아직 추가한 관심 종목이 존재하지 않습니다</h4>
+        </div>
+        {% endif %}
         <div class="col-md-12">
           <div class="title">
             <h2>
@@ -86,6 +92,21 @@
             </h2>
           </div>
         </div>
+        {% if activities %}
+        {% for activity in activities %}
+        <div class="col-md-4" style="margin-bottom:50px;">
+          <article class="activity-card" style="width:300px;">
+            <div class="activity-title">
+              아
+            </div>
+          </article>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-md-12" style="margin-top:50px; margin-bottom:100px; padding-left:250px;">
+          <h4>아직 작성한 게시글이 없습니다</h4>
+        </div>
+        {% endif %}
         
       </div>
     </div>
