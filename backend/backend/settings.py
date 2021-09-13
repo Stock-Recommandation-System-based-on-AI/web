@@ -27,7 +27,8 @@ SECRET_KEY = '6jtqmmfau#=z0=4bwmk6xnl_#pjnf$ptff5(kl#ax^f(&7@pb4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [".ap-northeast-2.compute.amazonaws.com",
+                '127.0.0.1']
 
 
 sys.modules['fontawesome_free'] = __import__('fontawesome-free')
