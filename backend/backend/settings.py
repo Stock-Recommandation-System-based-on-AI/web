@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'stock_deploy',
         'USER': 'root',
         'PASSWORD': '12356Rkd!@',
-        'HOST': ".ap-northeast-2.compute.amazonaws.com",
+        'HOST': "localhost",
         'PORT': "3306"
     }
 }
