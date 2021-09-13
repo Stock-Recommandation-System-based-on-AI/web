@@ -140,3 +140,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 AUTH_USER_MODEL = 'accounts.User'
+
+
+SESSION_COOKIE_AGE = 1200
+SESSION_SAVE_EVERY_REQUEST = True
