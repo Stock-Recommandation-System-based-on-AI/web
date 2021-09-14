@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from .models import Post
 from .forms import PostForm
+from stock.models import Stock
 
 # Create your views here.
 def post_list(request):
@@ -17,6 +18,7 @@ def post_list(request):
 
 def post_create(request):
     if request.user.is_authenticated:
+        stocks = Stock.objects.all()
         if request.method == "POST":
             form = PostForm(request.POST)
             if form.is_valid():
@@ -26,8 +28,11 @@ def post_create(request):
                 return redirect('community:post_list')
         else:
             form = PostForm()
+
         context = {
-            'form': form
+            'stocks': stocks,
+            'form': form,
+            'positions': ['홀드','매수','매도']
         }
         return render(request, 'community/post_form.html', context)
     else:
