@@ -16,22 +16,60 @@
   }
   .form-group label {
       color: black;
+      font-weight: bold;
   }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="main-wrapper bg-white">
+<div class="main-wrapper bg-white pb-5">
   <div style="height:20px;"></div>
-  <div class="card mt-5 mx-auto text-left p-3" style = "width: 50rem;">
+  <div class="card m-5 mx-auto text-left p-3" style = "width: 50rem;">
     <h1 class="text-center">글 작 성</h1>
     <br>
     <form action="" method="POST">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <button class="btn btn-primary btn-lg btn-block" submit="">입력</button>
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="id_title">제목</label>
+          {{ form.title }}
+        </div>
+        <div class="form-group col-md-6">
+          <label for="id_stock">예측할 주식 선택</label>
+          {{ form.stock }}
+          <datalist id="stock-list">
+            {% for stock in stocks %}
+            <option value="{{ stock.name }}">{{ stock.name }}</option>
+            {% endfor %}
+          </datalist>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="id_predict_date">예측 날짜</label>
+          <input type="date" id="id_predict_date" class="form-control" name="predict_date">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="id_position">포지션</label>
+          {{ form.position }}
+          <datalist id="position-list">
+            {% for position in positions %}
+            <option value="{{ position }}">{{ position }}</option>
+            {% endfor %}
+          </datalist>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="id_content">예측 이유</label>
+          {{ form.content }}
+        </div>
+      </div>
+      <button class="btn btn-primary btn-lg btn-block" submit="">입력</button>
     </form>
   </div>
 </div>
+
+<script>
+  let [today] = new Date().toISOString().split("T");
+  document.getElementById("id_predict_date").setAttribute("min", today);
+  document.getElementById("id_predict_date").value = today;
+</script>
 
 {% endblock %}
