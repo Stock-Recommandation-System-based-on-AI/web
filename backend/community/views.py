@@ -42,8 +42,10 @@ def post_create(request):
 def post_detail(request, post_pk):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, pk=post_pk)
+        stock = Stock.objects.all().get(name=post.stock)
         context = {
             'post': post,
+            'stock': stock,
         }
         return render(request, 'community/post_detail.html', context)
     else:
