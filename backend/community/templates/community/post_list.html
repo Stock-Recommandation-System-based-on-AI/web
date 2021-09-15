@@ -1,12 +1,55 @@
 {% extends 'base.html' %}
 {% block additional_styles %}
 <style>
-.container {
-  max-width: 720px;
+.card-body a {
+	color: #044A67;
+	text-decoration: none;
 }
-.table {
-  color: black;
-  margin-bottom: 200px;
+.btn {
+	margin-top: 5px;
+}
+.btn-buy {
+	color: #51a952 !important;
+	background-color: transparent;
+	border: 1px solid #51a952;
+	text-transform: uppercase;
+	border-radius: 22px;
+	font-weight: 700;
+}
+
+.btn-sell {
+	color: #fd4444 !important;
+	background-color: transparent;
+	border: 1px solid #fd4444;
+	text-transform: uppercase;
+	border-radius: 22px;
+	font-weight: 700;
+}
+
+.btn-hold {
+	color: orange !important;
+	background-color: transparent;
+	border: 1px solid orange;
+	text-transform: uppercase;
+	border-radius: 22px;
+	font-weight: 700;
+}
+.text-sm {
+	font-weight: 700;
+}
+.price-text {
+	font-size: 1.2em;
+	opacity: 0.4;
+}
+.pref-text {
+	font-size: 1.2em;
+	color: red;
+}
+.card-footer {
+	background-color: white;
+}
+.post-author-name h6{
+	margin-bottom: .5rem;
 }
 .container-bottom {
   justify-content: flex-end;
@@ -18,80 +61,79 @@
 {% endblock %}
 
 {% block content %}
-<div class="main-wrapper bg-white">
-	<div class="container mt-5 mb-1"></div>
-	<div class="container">
-		<div class="row justify-content-md-center">
-			<div class="col-md-12 d-md-block b-2" style="padding-right:0px;">
-				<div class="d-flex">
-					<div class="mr-auto">
-						<h3>자 유 게 시 판</h3>
+<div class="main-wrapper">
+	<section class="bg-white">
+		<div class="container">
+			<div class="row">
+				{% for post in page_obj %}
+				<div class="col-md-6" style="margin-top: 50px;">
+					<div class="card blog-card m-3">
+						<div class="card-body">
+							<div class="float-right">
+								{% if post.position == '매수' %}
+								<a class="btn btn-buy" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
+								{% elif post.position == '매도' %}
+								<a class="btn btn-sell" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
+								{% elif post.position == '홀드' %}
+								<a class="btn btn-hold" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
+								{% endif %}
+							</div>
+							<h5>
+								<a href="{% url 'community:post_detail' post.id %}">{{ post.title | truncatechars:15 }}</a>
+							</h5>
+							<div class="row">
+								<div class="col-4 text-sm">시작 가격</div>
+								<div class="col-4 text-center text-sm">예측 가격</div>
+								<div class="col-4 text-right text-sm">현재 수익율</div>
+							</div>
+							<div class="row">
+								<div class="col-4" style="line-height: 1.5;">
+									<span class="price-text">13000 원</span>
+									<br>
+									<small>
+										<span style="font-weight:600;" title="{{ post.created_at|date:'Y년 m월 d일' }}" data-placement="top" data-toggle="tooltip">{{ post.created_at|date:'m월 d일' }}</span>
+									</small>
+								</div>
+								<div class="col-4 text-center">
+									<span class="price-text">{{ post.price }} 원</span>
+									<br>
+									<small>
+										<span style="font-weight:600;" title="{{ post.predict_date|date:'Y년 m월 d일' }}" data-placement="top" data-toggle="tooltip">{{ post.predict_date|date:'m월 d일' }}</span>
+									</small>
+								</div>
+								<div class="col-4 text-right">
+									<span class="pref-text">1.15 %</span>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							<div class="post-author">
+								<div class="post-author-name text-right">
+									<h6>작성자: {{ post.user }}</h6>
+								</div>
+							</div>
+						</div>
 					</div>
-					<nav class="main-content-nav pb-1">
-					<form action="" method="GET" class="form-inline">
-					<input type="hidden" name="post_name" value="board">
-					<div class="form-group">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="customRadioInline1" name="f" class="custom-control-input" checked="">
-							<label class="custom-control-label" for="customRadioInline1">제목</label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="customRadioInline2" name="f" class="custom-control-input" value="c">
-							<label class="custom-control-label" for="customRadioInline2">내용</label>
-						</div>
-						<div class="input-group mt-1">
-							<input type="text" name="q" class="form-control" placeholder="Search Text..." required="">
-						</div>
-						<button class="btn btn-primary mt-1" type="submit">검색</button>
-					</div>
-					</form>
-					</nav>
 				</div>
-				<div class="table-responsive-md bg-white">
-					<table class="table table-hover">
-						<thead class="thead-dark">
-						<tr class="text-truncate">
-							<th scope="col">#</th>
-							<th scope="col">글쓴이</th>
-							<th scope="col">제목</th>
-							<th scope="col">조회수</th>
-							<th scope="col">날짜</th>
-						</tr>
-						</thead>
-						<tbody>
-							
-							{% for post in page_obj %}
-							<tr class="text-truncate">
-								<td>
-									{{ post.pk }}
-								</td>
-								<td>
-									{{ post.user }}
-								</td>
-								<td>
-									<a href="{% url 'community:post_detail' post.pk %}" style="text-decoration: none;">{{ post.title }}</a> 
-								</td>
-								<td>
-									0
-								</td>
-								<td>
-									{{ post.created_at|date:'m-d' }}
-								</td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-				<div class="d-flex p-2 container-bottom">
-					<div class="p-2">
-						<button type="button" class="btn btn-dark"><a href="{% url 'community:post_list' %}" style="text-decoration: none; color:white">목록</a></button>
-					</div>
-					<div class="p-2">
-						<button type="button" class="btn btn-dark"><a href="{% url 'community:post_create' %}" style="text-decoration: none; color:white">쓰기</a></button>
+				{% endfor %}
+				<div class="col-md-12" style="margin-top:100px;">
+					<div class="d-flex p-2 container-bottom">
+						<div class="p-2">
+							<button type="button" class="btn btn-dark"><a href="{% url 'community:post_list' %}" style="text-decoration: none; color:white">목록</a></button>
+						</div>
+						<div class="p-2">
+							<button type="button" class="btn btn-dark"><a href="{% url 'community:post_create' %}" style="text-decoration: none; color:white">쓰기</a></button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>	
+	</section>
 </div>
+
+<script>
+$(document).ready(function() {
+	$('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 {% endblock %}
