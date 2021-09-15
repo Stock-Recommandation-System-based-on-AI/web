@@ -18,6 +18,9 @@
       color: black;
       font-weight: bold;
   }
+  .position-group {
+    width: 50% !important
+  }
 </style>
 {% endblock %}
 
@@ -47,7 +50,7 @@
           <label for="id_predict_date">예측 날짜</label>
           <input type="date" id="id_predict_date" class="form-control" name="predict_date">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-3">
           <label for="id_position">포지션</label>
           {{ form.position }}
           <datalist id="position-list">
@@ -55,6 +58,10 @@
             <option value="{{ position }}">{{ position }}</option>
             {% endfor %}
           </datalist>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="id_price">예측 가격</label>
+          {{ form.price }}
         </div>
         <div class="form-group col-md-12">
           <label for="id_content">예측 이유</label>
