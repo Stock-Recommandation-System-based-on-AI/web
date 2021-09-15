@@ -25,6 +25,7 @@ class PostForm(forms.ModelForm):
                 'class': 'form-control',
                 'list': 'position-list',
                 'autocomplete': 'off',
+
             }
         )
     )
@@ -36,6 +37,13 @@ class PostForm(forms.ModelForm):
             }
         )
     )
+    price = forms.IntegerField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
     class Meta:
         model = Post
-        fields = ("title", "stock", "content", "position", "predict_date")
+        fields = ("title", "stock", "content", "position", "predict_date", "price")
