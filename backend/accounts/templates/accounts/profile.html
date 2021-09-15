@@ -44,6 +44,50 @@
   line-height: 1;
   color: #777;
 }
+.card-body a {
+	color: #044A67;
+	text-decoration: none;
+}
+.btn {
+	margin-top: 5px;
+}
+.btn-buy {
+	color: #51a952 !important;
+	background-color: transparent;
+	border: 1px solid #51a952;
+	text-transform: uppercase;
+	border-radius: 22px;
+	font-weight: 700;
+}
+
+.btn-sell {
+	color: #fd4444 !important;
+	background-color: transparent;
+	border: 1px solid #fd4444;
+	text-transform: uppercase;
+	border-radius: 22px;
+	font-weight: 700;
+}
+
+.btn-hold {
+	color: orange !important;
+	background-color: transparent;
+	border: 1px solid orange;
+	text-transform: uppercase;
+	border-radius: 22px;
+	font-weight: 700;
+}
+.text-sm {
+	font-weight: 700;
+}
+.price-text {
+	font-size: 1.2em;
+	opacity: 0.4;
+}
+.pref-text {
+	font-size: 1.2em;
+	color: red;
+}
 </style>
 {% endblock %}
 
@@ -93,14 +137,49 @@
           </div>
         </div>
         {% if activities %}
-        {% for activity in activities %}
-        <div class="col-md-4" style="margin-bottom:50px;">
-          <article class="activity-card" style="width:300px;">
-            <div class="activity-title">
-              아
-            </div>
-          </article>
-        </div>
+        {% for post in activities %}
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 50px;">
+					<div class="card blog-card m-3">
+						<div class="card-body">
+							<div class="float-right">
+								{% if post.position == '매수' %}
+								<a class="btn btn-buy" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
+								{% elif post.position == '매도' %}
+								<a class="btn btn-sell" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
+								{% elif post.position == '홀드' %}
+								<a class="btn btn-hold" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
+								{% endif %}
+							</div>
+							<h5>
+								<a href="{% url 'community:post_detail' post.id %}">{{ post.title | truncatechars:15 }}</a>
+							</h5>
+							<div class="row">
+								<div class="col-4 text-sm">시작 가격</div>
+								<div class="col-4 text-center text-sm">예측 가격</div>
+								<div class="col-4 text-right text-sm">현재 수익율</div>
+							</div>
+							<div class="row">
+								<div class="col-4" style="line-height: 1.5;">
+									<span class="price-text">13000 원</span>
+									<br>
+									<small>
+										<span style="font-weight:600;" title="{{ post.created_at|date:'Y년 m월 d일' }}" data-placement="top" data-toggle="tooltip">{{ post.created_at|date:'m월 d일' }}</span>
+									</small>
+								</div>
+								<div class="col-4 text-center">
+									<span class="price-text">{{ post.price }} 원</span>
+									<br>
+									<small>
+										<span style="font-weight:600;" title="{{ post.predict_date|date:'Y년 m월 d일' }}" data-placement="top" data-toggle="tooltip">{{ post.predict_date|date:'m월 d일' }}</span>
+									</small>
+								</div>
+								<div class="col-4 text-right">
+									<span class="pref-text">1.15 %</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
         {% endfor %}
         {% else %}
         <div class="col-md-12" style="margin-top:50px; margin-bottom:100px; padding-left:250px;">
