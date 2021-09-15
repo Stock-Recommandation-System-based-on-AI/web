@@ -7,4 +7,6 @@ class Stock(models.Model):
     symbol_id = models.CharField(max_length=100)
     container_id = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
+    position = models.CharField(max_length=100, blank=True)
+    probability = models.FloatField()
     interest_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='interest_stock', blank=True)
