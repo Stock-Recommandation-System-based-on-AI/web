@@ -8,7 +8,7 @@ from datetime import date, timedelta, datetime
 # Create your views here.
 # 17시가 지나면 당일의 데이터를 불러온다. 17시 전이라면 전날의 데이터를 불러온다.
 time_data = datetime.now().strftime("%H:%M:%S")
-if int(time_data[:2]) > 16:
+if int(time_data[:2]) > 15:
     d = 0
 else:
     d = 1
@@ -18,13 +18,13 @@ if date(int(today[:4]), int(today[5:7]), int(today[8:])).weekday() > 4:
     minus_day = date(int(today[:4]), int(today[4:6]), int(today[6:])).weekday() - 4
     today = (date.today() - timedelta(minus_day) - timedelta(d)).strftime('%Y-%m-%d')
 
-
 def post_list(request):
     posts = Post.objects.order_by('-pk')
     for post in posts:
         stock = Stock.objects.get(name=post.stock)
         today_price = Stock_price.objects.get(stock=stock.pk, date=today).price
         post.today_price = today_price
+        print(today_price)
     paginator = Paginator(posts, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

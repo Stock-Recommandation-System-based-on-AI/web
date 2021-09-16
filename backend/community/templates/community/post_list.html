@@ -104,7 +104,7 @@
 								<div class="col-4 text-right">
 									<span class="pref-text">
 										<script>
-											document.write(({{ post.today_price }}/{{ post.current_price }}*100-100));
+											document.write(({{ post.today_price }}/{{ post.current_price }}*100-100).toFixed(2));
 										</script>
 										%
 									</span>

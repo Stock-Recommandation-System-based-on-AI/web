@@ -112,8 +112,14 @@ label {
               {% endif %}
               <span style="display:inline-block;">
                 <small id="date">2021년 9월 5일</small>
-                <small style="color:#fd4444;font-weight: bold;">매도</small>
-              </span>
+                {% if stock_detail.position == '매도' %}
+                <small style="color:#fd4444;font-weight: bold;">{{ stock_detail.position }}</small>
+                {% elif stock_detail.position == '매수' %}
+                <small style="color:#51a952;font-weight: bold;">{{ stock_detail.position }}</small>
+                {% else %}
+                <small style="color:orange;font-weight: bold;">{{ stock_detail.position }}</small>
+                {% endif %}
+            </span>
             </h2>
           </div>
         </div>
@@ -139,12 +145,10 @@ label {
                   </span>
                 </div>
               </form>
-              <a style="margin-top:20px;" href="" class="btn "><i class="fa fa-chart-line"></i>모든 예측</a>
-              <a title="" style="margin-top:20px;color:red;" href="" class="btn "><i class="fa fa-chart-line"></i>강력 매도</a>
-              <a title="" style="margin-top:20px;color:#fd4444;" href="" class="btn "><i class="fa fa-chart-line"></i>매도</a>
-              <a title="" style="margin-top:20px;color:#fec761;" href="" class="btn "><i class="fa fa-chart-line"></i>관망</a>
-              <a title="" style="margin-top:20px;color:orange;" href="" class="btn "><i class="fa fa-chart-line"></i>홀드</a>
-              <a title="" style="margin-top:20px;color:#51a952;" href="" class="btn "><i class="fa fa-chart-line"></i>매수</a>
+              <a style="margin-top:20px;" href="/forecasts/" class="btn"><i class="fa fa-chart-line"></i> 모든 예측</a>
+              <a style="margin-top:20px;color:#fd4444;" href="/forecasts/?p=매도" class="btn"><i class="fa fa-chart-line"></i> 매도</a>
+              <a style="margin-top:20px;color:orange;" href="/forecasts/?p=홀드" class="btn"><i class="fa fa-chart-line"></i> 홀드</a>
+              <a style="margin-top:20px;color:#51a952;" href="/forecasts/?p=매수" class="btn"><i class="fa fa-chart-line"></i> 매수</a>
             </div>
           </div>
         </div>

@@ -91,7 +91,7 @@
                 현재 수익율
                 <h4 style="font-size: 1.4em; color: red;">
                   <script>
-                    document.write(({{ post.today_price }}/{{ post.current_price }}*100-100));
+                    document.write(({{ post.today_price }}/{{ post.current_price }}*100-100).toFixed(2));
                   </script>
                   %
                 </h4>
