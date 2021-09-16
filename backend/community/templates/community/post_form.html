@@ -76,7 +76,6 @@
 <script>
   let [today] = new Date().toISOString().split("T");
   document.getElementById("id_predict_date").setAttribute("min", today);
-  document.getElementById("id_predict_date").value = today;
 </script>
 
 {% endblock %}
