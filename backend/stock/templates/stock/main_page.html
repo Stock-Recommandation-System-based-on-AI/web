@@ -275,123 +275,76 @@
             </h2>
           </div>
         </div>
+        {% for stock in stocks %}
         <div class="col-md-4">
-          <article class="stock-card" style="width: 300px;">
+          <article class="stock-card" style="width: 350px;">
             <div class="stock-chart">
               <h4 class="stock-title">
-                <a href="" tabindex="0">삼성전자</a>
+                <a href="" tabindex="0">{{ stock.name }}</a>
                 <span style="display:inline-block;">
-                  <small>2021년 8월 30일</small>
-                  <small style="color:#fd4444;font-weight: bold;">SELL</small>
+                  <small class="date">2021년 8월 30일</small>
+                  {% if stock.position == '매도' %}
+                  <small style="color:#fd4444;font-weight: bold;">{{ stock.position }}</small>
+                  {% elif stock.position == '매수' %}
+                  <small style="color:#51a952;font-weight: bold;">{{ stock.position }}</small>
+                  {% else %}
+                  <small style="color:orange;font-weight: bold;">{{ stock.position }}</small>
+                  {% endif %}
                 </span>
               </h4>
               <div class="stock-widget">
                 <div class="tradingview-widget-container">
-                  <div id="tradingview_33640" class="widget-view"></div>
+                  <div id="{{ stock.container_id }}" class="widget-view"></div>
                 </div>
               </div>
             </div>
           </article>
         </div>
-        <div class="col-md-4">
-          <article class="stock-card" style="width: 300px;">
-            <div class="stock-chart">
-              <h4 class="stock-title">
-                <a href="" tabindex="0">SK하이닉스</a>
-                <span style="display:inline-block;">
-                  <small>2021년 8월 30일</small>
-                  <small style="color:#fd4444;font-weight: bold;">SELL</small>
-                </span>
-              </h4>
-              <div class="stock-widget">
-                <div class="tradingview-widget-container">
-                  <div id="tradingview_227d4" class="widget-view"></div>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-4">
-          <article class="stock-card" style="width: 300px;">
-            <div class="stock-chart">
-              <h4 class="stock-title">
-                <a href="" tabindex="0">대한항공</a>
-                <span style="display:inline-block;">
-                  <small>2021년 8월 30일</small>
-                  <small style="color:#fd4444;font-weight: bold;">SELL</small>
-                </span>
-              </h4>
-              <div class="stock-widget">
-                <div class="tradingview-widget-container">
-                  <div id="tradingview_a2e75" class="widget-view"></div>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
 </div>
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
-  new TradingView.widget(
-    {
-      "width": 300,
-      "height": 350,
-      "symbol": "KRX:005930",
-      "interval": "D",
-      "timezone": "Etc/UTC",
-      "theme": "dark",
-      "style": "1",
-      "locale": "kr",
-      "toolbar_bg": "#f1f3f6",
-      "hide_top_toolbar": true,
-      "enable_publishing": false,
-      "allow_symbol_change": true,
-      "container_id": "tradingview_33640"
-    }
-  );
-</script>
-<script type="text/javascript">
-  new TradingView.widget(
-    {
-    "width": 300,
-    "height": 350,
-    "symbol": "KRX:000660",
-    "interval": "D",
-    "timezone": "Asia/Seoul",
-    "theme": "dark",
-    "style": "1",
-    "locale": "kr",
-    "toolbar_bg": "#f1f3f6",
-    "enable_publishing": false,
-    "hide_top_toolbar": true,
-    "allow_symbol_change": true,
-    "save_image": false,
-    "container_id": "tradingview_227d4"
-    }
-  );
-</script>
-<script type="text/javascript">
-  new TradingView.widget(
-    {
-    "width": 300,
-    "height": 350,
-    "symbol": "KRX:003490",
-    "interval": "D",
-    "timezone": "Asia/Seoul",
-    "theme": "dark",
-    "style": "1",
-    "locale": "kr",
-    "toolbar_bg": "#f1f3f6",
-    "enable_publishing": false,
-    "hide_top_toolbar": true,
-    "allow_symbol_change": true,
-    "save_image": false,
-    "container_id": "tradingview_a2e75"
-    }
-  );
+(() => {  const obj = [
+        {% for stock in stocks %}
+          {
+            key: '{{ stock.container_id }}',
+            symbol: '{{ stock.symbol_id }}',
+          },
+        {% endfor %}
+        ]
+        obj.forEach(({ key, symbol }) => {
+          const today = new Date();
+          const year = today.getFullYear();
+          const month = ('0' + (today.getMonth() + 1)).slice(-2);
+          const day = ('0' + today.getDate()).slice(-2);
+          const datestring = year + '년 ' + month + '월 ' + day + '일';
+          const date = document.getElementsByClassName("date");
+          for( var i = 0; i < date.length; i++){
+            var date1 = date.item(i);
+            date1.innerHTML = datestring
+        }
+        new TradingView.widget(
+          {
+            "width": 350,
+            "height": 300,
+            "symbol": symbol,
+            "interval": "D",
+            "timezone": "Asia/Seoul",
+            "theme": "dark",
+            "style": "1",
+            "locale": "kr",
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "save_image": false,
+            "container_id": key
+          }
+      );
+    })
+  })();
+
 </script>
 
 
