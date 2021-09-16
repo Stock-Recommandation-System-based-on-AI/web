@@ -59,6 +59,9 @@
     .footer-copyright {
       background-color: #04415b;
     }
+    .list-unstyled {
+      line-height: 2;
+    }
   </style>
   {% block additional_styles %}
   {% endblock %}
@@ -109,16 +112,16 @@
           <h5 class="text-uppercase">Links</h5>
           <ul class="list-unstyled">
             <li>
-              <a href="#!">Link 1</a>
+              <a href="/">HOME</a>
             </li>
             <li>
-              <a href="#!">Link 2</a>
+              <a href="{% url 'stock:forecasts' %}">FORECAST</a>
             </li>
             <li>
-              <a href="#!">Link 3</a>
+              <a href="{% url 'community:post_list' %}">COMMUNITY</a>
             </li>
             <li>
-              <a href="#!">Link 4</a>
+              <a href="#!">ABOUT US</a>
             </li>
           </ul>
         </div>
@@ -126,16 +129,16 @@
           <h5 class="text-uppercase">Links</h5>
           <ul class="list-unstyled">
             <li>
-              <a href="#!">Link 1</a>
+              <a href="{% url 'accounts:login' %}">LOGIN</a>
             </li>
             <li>
-              <a href="#!">Link 2</a>
+              <a href="{% url 'accounts:signup' %}">SIGNUP</a>
             </li>
             <li>
-              <a href="#!">Link 3</a>
+              <a href="{% url 'accounts:profile' request.user %}">MYPAGE</a>
             </li>
             <li>
-              <a href="#!">Link 4</a>
+              <a href="#!"></a>
             </li>
           </ul>
         </div>
