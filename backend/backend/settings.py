@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'fontawesome_free',
     'bootstrap_pagination',
     'pykrx',
+    'schedule',
 ]
 
 MIDDLEWARE = [
