@@ -88,21 +88,26 @@
 							</div>
 							<div class="row">
 								<div class="col-4" style="line-height: 1.5;">
-									<span class="price-text">13000 원</span>
+									<span class="price-text">{{ post.current_price }} 원</span>
 									<br>
 									<small>
 										<span style="font-weight:600;" title="{{ post.created_at|date:'Y년 m월 d일' }}" data-placement="top" data-toggle="tooltip">{{ post.created_at|date:'m월 d일' }}</span>
 									</small>
 								</div>
 								<div class="col-4 text-center">
-									<span class="price-text">{{ post.price }} 원</span>
+									<span class="price-text">{{ post.predict_price }} 원</span>
 									<br>
 									<small>
 										<span style="font-weight:600;" title="{{ post.predict_date|date:'Y년 m월 d일' }}" data-placement="top" data-toggle="tooltip">{{ post.predict_date|date:'m월 d일' }}</span>
 									</small>
 								</div>
 								<div class="col-4 text-right">
-									<span class="pref-text">1.15 %</span>
+									<span class="pref-text">
+										<script>
+											document.write(({{ post.today_price }}/{{ post.current_price }}*100-100));
+										</script>
+										%
+									</span>
 								</div>
 							</div>
 						</div>
