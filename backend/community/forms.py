@@ -37,7 +37,7 @@ class PostForm(forms.ModelForm):
             }
         )
     )
-    price = forms.IntegerField(
+    predict_price = forms.IntegerField(
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
@@ -46,4 +46,4 @@ class PostForm(forms.ModelForm):
     )
     class Meta:
         model = Post
-        fields = ("title", "stock", "content", "position", "predict_date", "price")
+        fields = ("title", "stock", "content", "position", "predict_date", "predict_price")
