@@ -10,6 +10,7 @@ class Post(models.Model):
     content = models.TextField()
     predict_date = models.DateField()
     position = models.CharField(max_length=100)
-    price = models.IntegerField()
+    predict_price = models.IntegerField()
+    current_price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
