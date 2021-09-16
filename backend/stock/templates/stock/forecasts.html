@@ -100,13 +100,10 @@ label {
                 </span>
               </div>
             </form>
-            <a style="margin-top:20px;" href="" class="btn"><i class="fa fa-chart-line"></i> ALL FORECASTS</a>
-            <a style="margin-top:20px;color:red;" href="" class="btn"><i class="fa fa-chart-line"></i>STRONG SELL</a>
-            <a style="margin-top:20px;color:#fd4444;" href="" class="btn"><i class="fa fa-chart-line"></i> SELL</a>
-            <a style="margin-top:20px;color:#fec761;" href="" class="btn"><i class="fa fa-chart-line"></i> NEUTRAL</a>
-            <a style="margin-top:20px;color:orange;" href="" class="btn"><i class="fa fa-chart-line"></i> HOLD</a>
-            <a style="margin-top:20px;color:#51a952;" href="" class="btn"><i class="fa fa-chart-line"></i> BUY</a>
-            <a style="margin-top:20px;color:green;" href="" class="btn"><i class="fa fa-chart-line"></i> STRONG BUY</a>
+            <a style="margin-top:20px;" href="/forecasts/" class="btn"><i class="fa fa-chart-line"></i> ALL FORECASTS</a>
+            <a style="margin-top:20px;color:#fd4444;" href="/forecasts/?p=매도" class="btn"><i class="fa fa-chart-line"></i> 매도</a>
+            <a style="margin-top:20px;color:orange;" href="/forecasts/?p=홀드" class="btn"><i class="fa fa-chart-line"></i> 홀드</a>
+            <a style="margin-top:20px;color:#51a952;" href="/forecasts/?p=매수" class="btn"><i class="fa fa-chart-line"></i> 매수</a>
           </div>
         </div>
         {% for stock in page_obj %}
@@ -116,7 +113,13 @@ label {
                 <a href="{% url 'stock:forecast_detail' stock.id %}" tabindex="0">{{ stock.name }}</a>
                 <span style="display:inline-block;">
                   <small class="date">2021년 8월 30일</small>
-                  <small style="color:#fd4444;font-weight: bold;">SELL</small>
+                  {% if stock.position == '매도' %}
+                  <small style="color:#fd4444;font-weight: bold;">{{ stock.position }}</small>
+                  {% elif stock.position == '매수' %}
+                  <small style="color:#51a952;font-weight: bold;">{{ stock.position }}</small>
+                  {% else %}
+                  <small style="color:orange;font-weight: bold;">{{ stock.position }}</small>
+                  {% endif %}
                 </span>
               </h2>
             </div>
