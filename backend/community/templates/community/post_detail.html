@@ -57,60 +57,66 @@
 
 {% block content %}
 <div class="main-wrapper">
-  <div class="section bg-white">
-    <div class ="container">
-      <a class="btn btn-outline-secondary" href="{% url 'community:post_list' %}" style="margin-top:100px;">목록으로 돌아가기</a>
+  <section class="bg-white">
+    <div class="container">
+      <div class="row">
+        <a class="btn btn-outline-secondary" href="{% url 'community:post_list' %}" style="margin-top:100px;">목록으로 돌아가기</a>
       {% if request.user == post.user %}
         <a class="btn btn-primary" href="{% url 'community:post_update' post.pk %}" style="margin-top:100px; margin-left: 20px;">글 수정</a>
         <a class="btn btn-danger" href="{% url 'community:post_delete' post.pk %}" style="margin-top:100px; margin-left: 20px;">글 삭제</a>
       {% endif %}
-      <div class="card my-5">
-        <div class="card-body">
-          <div class="float-right">
-            {% if post.position == '매수' %}
-            <a class="btn btn-buy position-btn" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
-            {% elif post.position == '매도' %}
-            <a class="btn btn-sell position-btn" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
-            {% elif post.position == '홀드' %}
-            <a class="btn btn-hold position-btn" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
-            {% endif %}
-          </div>
-          <h2>{{ post.title }}</h2>
-          <h5>{{ post.user }}</h5>
-          <div class="row">
-            <div class="col-6 col-sm-3">
-              시작 가격
-              <h4 style="font-size: 1.4em;">13000 원</h4>
+        <div class="card my-5">
+          <div class="card-body">
+            <div class="float-right">
+              {% if post.position == '매수' %}
+              <a class="btn btn-buy position-btn" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
+              {% elif post.position == '매도' %}
+              <a class="btn btn-sell position-btn" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
+              {% elif post.position == '홀드' %}
+              <a class="btn btn-hold position-btn" href="{% url 'community:post_detail' post.id %}">{{ post.position }}</a>
+              {% endif %}
             </div>
-            <div class="col-6 col-sm-3">
-              예측 가격
-              <h4 style="font-size: 1.4em;">{{ post.price }} 원</h4>
-            </div>
-            <div class="col-6 col-sm-3">
-              현재 수익율
-              <h4 style="font-size: 1.4em;">1.15 %</h4>
-            </div>
-            <div class="col-6 col-sm-3">
-              현재 주가
-              <h4 style="font-size: 1.4em;">13000 원</h4>
-            </div>
-            <div class="col-md-12">
-              <article class="stock-chart">
-                <div class="tradingview-widget-container">
-                  <div id="{{ stock.container_id }}"></div>
-                </div>
-              </article>
-            </div>
-            <div class="col-12">
-              <h4>예측 이유</h4>
-              <h6>{{ post.content }}</h6>
+            <h2>{{ post.title }}</h2>
+            <h5>{{ post.user }}</h5>
+            <div class="row">
+              <div class="col-6 col-sm-3">
+                시작 가격
+                <h4 style="font-size: 1.4em;">{{ post.current_price }} 원</h4>
+              </div>
+              <div class="col-6 col-sm-3">
+                예측 가격
+                <h4 style="font-size: 1.4em;">{{ post.predict_price }} 원</h4>
+              </div>
+              <div class="col-6 col-sm-3">
+                현재 수익율
+                <h4 style="font-size: 1.4em; color: red;">
+                  <script>
+                    document.write(({{ post.today_price }}/{{ post.current_price }}*100-100));
+                  </script>
+                  %
+                </h4>
+              </div>
+              <div class="col-6 col-sm-3">
+                현재 주가
+                <h4 style="font-size: 1.4em;">{{ post.today_price }} 원</h4>
+              </div>
+              <div class="col-md-12">
+                <article class="stock-chart">
+                  <div class="tradingview-widget-container">
+                    <div id="{{ stock.container_id }}"></div>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12">
+                <h4>예측 이유</h4>
+                <h6>{{ post.content }}</h6>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  
+  </section>
 </div>
 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script type="text/javascript"> 
